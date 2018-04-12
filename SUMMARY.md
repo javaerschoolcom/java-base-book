@@ -10,5 +10,5 @@
     * [第005讲 变量](chapter02-section02.md)
     * [第006讲 表达式](chapter02-section03.md)
     * [第007讲 数据类型](chapter02-section04.md)
-
+    * [第008讲 运算符](chapter02-section05.md)
 
