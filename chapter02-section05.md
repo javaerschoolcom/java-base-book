@@ -4,7 +4,6 @@
 > 算术运算符有：+ - * / % ++ --
 
 ###### +运算
-
 1. +作为一元运算符 表示正数
 2. +作为二元运算符 表示加法运算
 ``` java
@@ -28,43 +27,156 @@
      String x="hello";
      char y=1;
      System.out.println(x+y); // helloa
-      System.out.println("lero"+1+1); // lero11
+     System.out.println("lero"+1+1); // lero11
 ```
 
-###### 注意事项
-1. +如果有字符串算子，结果是字符串，连接符
-2. +左右算子均为char  97+1= 195  b
+###### -运算
+1. -作为一元运算符 表示负数
+2. -作为二元运算符 表示减法运算
+``` java
+     System.out.println(2-1); //左右算子均为数值
+```
 
--
-1. 一元运算符符号
-2. 二元运算符减号
+###### *运算
+1. *为二元运算符 表示乘法运算
+``` java
+     System.out.println(2*1); //2
+```
 
-*
+###### /运算
+1. /为二元运算符 表示除法运算
+``` java
+     System.out.println(2/1); //2
+```
+2. 当被除数为整数，除数不能为0
+``` java
+     System.out.println(2/0); //运行报错
+```
+3. 当被除数为小数,除数可以为0；则结果是无穷大
+``` java
+     System.out.println(2.0/0); //Infinity
+```
+4. 当被除数为整数,除数为0.0；结果是无穷大
+``` java
+     System.out.println(2/0.0); //Infinity
+```
+5. 当被除数为0.0，除数为0.0或者0；结果为NaN  not a number
+``` java
+     System.out.println(0.0/0.0); //NaN
+```
+6. 整数除以整数结果小数部分舍去
+``` java
+     System.out.println(10/3); //3
+```
+###### %运算
+1. %为二元运算符  表示求模/求余数
+``` java
+     System.out.println(10%3); //1
+```
+2.求模的结果取决于被除数，被除数为整数结果为正，被除数为负结果为负
+``` java
+     System.out.println(-10%3); //-1
+     System.out.println(10%-3); //1
+     System.out.println(-10%-3); //-1
+```
 
-/
-1.除数不能为0（被除数为整数）
-2.被除数为小数,除数可以为0；结果是无穷
-3.被除数为整数,除数为0.0；结果是无穷
-4.被除数为0.0，除数为0.0|0；结果为NaN  not a number
-5.整数除以整数结果小数部分舍去
+###### ++运算
+1. ++为一元运算符 表示累加，算子可以在运算符左边，也可以在运算符右边
+``` java
+     int i=1;
+     System.out.println(i++); //1
+     int j=1;
+     System.out.println(++i); //2
+```
+2. 算子在左边  算子++  不管怎么算子本身总是加1 表达式的值是算子加一【前】的值
+``` java
+     int i=1;
+     System.out.println(i++); // 表达式(i++)的值是1
+     System.out.println(i); //算子i的值是2
+```
+3. 算子在右边  ++算子  不管怎么算子本身总是加1 表达式的值是算子加一【后】的值
+``` java
+     int i=1;
+     System.out.println(++i); // 表达式(++i)的值是2
+     System.out.println(i); //算子i的值是2
+```
+###### --运算
+1. --为一元运算符 表示累减，算子可以在运算符左边，也可以在运算符右边
+``` java
+     int i=1;
+     System.out.println(i--); //1
+     int j=1;
+     System.out.println(--i); //0
+```
+2. 算子在左边  算子--  不管怎么算子本身总是减1 表达式的值是算子减一【前】的值
+``` java
+     int i=1;
+     System.out.println(i--); // 表达式(i--)的值是1
+     System.out.println(i); //算子i的值是0
+```
+3. 算子在右边  --算子  不管怎么算子本身总是减1 表达式的值是算子减一【后】的值
+``` java
+     int i=1;
+     System.out.println(--i); // 表达式(--i)的值是0
+     System.out.println(i); //算子i的值是0
+```
 
-%
-1.求模/求余数
-求模的结果取决于被除数，被除数为整数结果为正，被除数为负结果为负
+###  赋值运算符
+> 赋值运算符号有= += -= *= /= %=
+> 赋值运算符运算规则：把符号左边和右边相加的结果重新赋值给左边
 
-++
-1. 把算子累加一
-2. ++在算子的右边   算子++   先运算这个表达式的值==算子的值，运算完成过后算子本身自己加一
-2. ++在算子的左边   ++算子   先运算这个表达式的值==算子的值+1，运算完成过后算子本身自己加一
+1.
 
---
+2. 赋值运算符含有隐式转换
+``` java
+    short x=1;
+    x=x+1;  //编译失败
+    System.out.println(x);
+```
+
+``` java
+    short x=1;
+    x+=1;  //编译成功  隐含了这步操作 x=(short)(x+1)
+    System.out.println(x);
+```
+
+### 比较运算符
+>  比较运算符有> >= == != < <=
+>  比较的结果一定是布尔值
+
+1. 比较的是数值
+
+2. ==和!=两个运算符可以比较字符串(比较是地址，一般采用equal方法)
 
 
+### 逻辑运算符
+>  逻辑运算符有| & ^ || &&  !
+>  逻辑运算的结果一定是布尔值
+
+1. 逻辑运算符的算子是布尔值或者布尔表达
+``` java
+    System.out.println(true|false); //有真则真  true
+    System.out.println(true&false); //有假则假   false
+    System.out.println(true^false); //同假异真   true
+    System.out.println(true^true); //同假异真   false
+    System.out.println(false^false); //同假异真   false
+    System.out.println(true||false); //有真则真  true
+    System.out.println(true&&false); //有假则假  false
+    System.out.println(1>3&&false); //有假则假   false
+    System.out.println(!!false); //求反  true
+```
+2. &和&&的区别
 
 
+### 位运算符
+>  位运算符有| &  ~  ^  << >>  >>
+>  二进制
 
 
+### 三目运算符
+>   数据类型  result=布尔表达式?表达式1:表达式2
 
+1. 注意事项：表达式1的类型要和表达式2的类型一直或者兼容
 
 
 

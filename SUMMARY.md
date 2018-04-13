@@ -11,4 +11,5 @@
     * [第006讲 表达式](chapter02-section03.md)
     * [第007讲 数据类型](chapter02-section04.md)
     * [第008讲 运算符](chapter02-section05.md)
+    * [第009讲 流程控制](chapter02-section06.md)
 
