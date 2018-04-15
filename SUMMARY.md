@@ -5,6 +5,7 @@
     * [第001讲 诞生史](chapter01-section01.md)
     * [第002讲 发展史](chapter01-section02.md)
     * [第003讲 三大平台](chapter01-section03.md)
+    * [第004讲 特点](chapter01-section03.md)
 * [第二章 java语法基础](chapter02.md)
     * [第004讲 常量](chapter02-section01.md)
     * [第005讲 变量](chapter02-section02.md)
