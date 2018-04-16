@@ -123,9 +123,14 @@
 
 ###  赋值运算符
 > 赋值运算符号有= += -= *= /= %=
-> 赋值运算符运算规则：把符号左边和右边相加的结果重新赋值给左边
+> 赋值运算符运算规则：把符号左边和右边相(加|减|乘|除|模)的结果重新赋值给左边
 
-1.
+1. 基本使用
+``` java
+    int x=1;// 赋值符=：把右边的1赋值给左边的x
+    x+=1;  //相当于 x=x+1
+    System.out.println(x);//2
+```
 
 2. 赋值运算符含有隐式转换
 ``` java
@@ -142,12 +147,27 @@
 
 ### 比较运算符
 >  比较运算符有> >= == != < <=
->  比较的结果一定是布尔值
+>  比较运算符的结果一定是布尔值
 
-1. 比较的是数值
-
+1. 比较的是数值,不能是布尔类型
+``` java
+    System.out.println(1>2);  //false
+    System.out.println(1>=2); //false
+    System.out.println(1==2); //false
+    System.out.println(1!=2); //true
+    System.out.println(1<2);  //true
+    System.out.println(1<=2); //true
+    //System.out.println(true>false); //编译失败
+```
 2. ==和!=两个运算符可以比较字符串(比较是地址，一般采用equal方法)
-
+``` java
+    String  x="abc";
+    String  y="a"+"b"+"c";
+    String  z=new String("abc");
+    System.out.println(x==y);  //true 都在常量区，地址一样
+    System.out.println(x==z); //false 比较的是地址，存储的地址不一样
+    System.out.println(x.equals(z)); //true  比较的是地址中存储的值
+```
 
 ### 逻辑运算符
 >  逻辑运算符有| & ^ || &&  !
@@ -166,18 +186,54 @@
     System.out.println(!!false); //求反  true
 ```
 2. &和&&的区别
+``` java
+    int x =1;
+    System.out.println(false&x++); //&运算符左边为假，依旧会进行右边运算
+    System.out.println(x);// x=2
 
+    System.out.println(false&&x++);  //&运算符左边为假，不会进行右边运算
+    System.out.println(x);// x=1
+```
 
 ### 位运算符
 >  位运算符有| &  ~  ^  << >>  >>
->  二进制
+>  位运算符都是把整数转为二进制，作用于每一位
 
+``` java
+    int x =3; // 00000000_00000000_00000000_00000011
+    int y =4; // 00000000_00000000_00000000_00000100
+    System.out.println(x|y); // 00000000_00000000_00000000_00000111    结果为7
+    System.out.println(x&y);//  00000000_00000000_00000000_00000000    结果为0
+    System.out.println(x^y);//  00000000_00000000_00000000_00000111    结果为7
+
+    int z=2; //如何快速计算2的3次方？
+    System.out.println(2<<2);  // 8
+    int j=16; //如何快速把16变为2
+    System.out.println(16>>3);// 2
+```
+1. 不使用额外变量,交换两个存储整数变量的值,两个变量连续异或三次，就会交换位置
+
+``` java
+    int x =3;
+    int y =4;
+    x=x^y;
+    y=x^y;
+    x=x^y;
+    System.out.println(x); // 4
+    System.out.println(y);//  3
+```
 
 ### 三目运算符
 >   数据类型  result=布尔表达式?表达式1:表达式2
+>   注意事项：表达式1的类型要和表达式2的类型一至或者兼容
 
-1. 注意事项：表达式1的类型要和表达式2的类型一直或者兼容
-
-
+1. 若布尔表达式的结果为true,则result为表达式1的值；若表达式的结果为false,则result为表达式2的值
+``` java
+    //需求：求x和y的最大值
+    int x =3; //
+    int y =4; //
+    int result= (x>4)?x:y ;
+    System.out.println(result);// 4
+```
 
 
