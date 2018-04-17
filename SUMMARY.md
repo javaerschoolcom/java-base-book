@@ -13,4 +13,6 @@
     * [第007讲 数据类型](chapter02-section04.md)
     * [第008讲 运算符](chapter02-section05.md)
     * [第009讲 流程控制](chapter02-section06.md)
+    * [第010讲 方法](chapter02-section07.md)
+    * [第011讲 数组](chapter02-section08.md)
 
