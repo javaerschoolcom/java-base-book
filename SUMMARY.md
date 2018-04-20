@@ -17,3 +17,4 @@
     * [第011讲 数组](chapter02-section08.md)
 * [第三章 面向对象](chapter03.md)
     * [第012讲 概述](chapter03-section01.md)
+    * [第013讲 封装](chapter03-section02.md)
