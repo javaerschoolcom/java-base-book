@@ -18,3 +18,5 @@
 * [第三章 面向对象](chapter03.md)
     * [第012讲 概述](chapter03-section01.md)
     * [第013讲 封装](chapter03-section02.md)
+    * [第014讲 继承](chapter03-section03.md)
+    * [第015讲 多态](chapter03-section04.md)
