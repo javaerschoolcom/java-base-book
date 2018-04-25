@@ -22,4 +22,6 @@
     * [第015讲 多态](chapter03-section04.md)
     * [第016讲 抽象类](chapter03-section05.md)
     * [第017讲 接口](chapter03-section06.md)
+    * [第018讲 内部类](chapter03-section07.md)
+    * [第019讲 枚举](chapter03-section08.md)
 
