@@ -47,40 +47,40 @@
 
 3. 所有的枚举都继承了Enum类,枚举可以当普通的类使用，枚举天生不能被继承，枚举的构造方法是私有的
 ``` java
-public enum Season {
-    SPRING("春天",1),SUMMER("夏天",2),AUTUMN("秋天",3),WINTER("冬天",4);
-    private int index;
-    private String name;
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setIndex(int index) {
-        this.index = index;
-    }
-    public int getIndex() {
-        return index;
-    }
-    Season(){}; //默认权限修饰符 也是私有的
-    private Season(String name,int index){
-        this.name= name;
-        this.index=index;
-    }
-    //通过字符串判断是否是制定的枚举类型
-    public static Season  getRealEnum(String s){
-        Season[] values = Season.values();
-        for(Season item:values){
-           if(s.equals(item.getName())){
-               return item;
-           }
+    public enum Season {
+        SPRING("春天",1),SUMMER("夏天",2),AUTUMN("秋天",3),WINTER("冬天",4);
+        private int index;
+        private String name;
+        public void setName(String name) {
+            this.name = name;
         }
-        return null;
+        public String getName() {
+            return name;
+        }
+        public void setIndex(int index) {
+            this.index = index;
+        }
+        public int getIndex() {
+            return index;
+        }
+        Season(){}; //默认权限修饰符 也是私有的
+        private Season(String name,int index){
+            this.name= name;
+            this.index=index;
+        }
+        //通过字符串判断是否是制定的枚举类型
+        public static Season  getRealEnum(String s){
+            Season[] values = Season.values();
+            for(Season item:values){
+               if(s.equals(item.getName())){
+                   return item;
+               }
+            }
+            return null;
+        }
     }
-}
 
-public class Test {
+    public class Test {
         public static void main(String[] args) {
            show();
         }
