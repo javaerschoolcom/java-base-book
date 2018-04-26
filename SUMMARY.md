@@ -24,4 +24,9 @@
     * [第017讲 接口](chapter03-section06.md)
     * [第018讲 内部类](chapter03-section07.md)
     * [第019讲 枚举](chapter03-section08.md)
+* [第四章 核心类](chapter04.md)
+    * [第020讲 包装类](chapter04-section01.md)
+    * [第021讲 String类](chapter04-section02.md)
+
+
 
