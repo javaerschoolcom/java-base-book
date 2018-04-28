@@ -27,6 +27,8 @@
 * [第四章 核心类](chapter04.md)
     * [第020讲 包装类](chapter04-section01.md)
     * [第021讲 String类](chapter04-section02.md)
+    * [第023讲 日期类](chapter04-section03.md)
+    * [第024讲 异常类](chapter04-section04.md)
 
 
 

@@ -4,8 +4,16 @@
 >  包装类其实就是8大基本数据类型封装成的类,后面操作的数据可就是对象，就需要把基本数据类型转换成类的方式
 
 ###  包装类
-|byte|short|char|int|long|float|double|boolean|
-|Byte|Short|Character|Integer|Long|Float|Double|Boolean|
+|基本类型|包装类型|
+|:---|:---|
+|byte|Byte|
+|short|Short|
+|char|Character|
+|int|Integer|
+|long|Long|
+|float|Float|
+|doublue|Double|
+|boolean|Boolean|
 
 ###  包装类和基本类型互转
 ``` java

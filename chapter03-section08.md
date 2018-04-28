@@ -10,6 +10,7 @@
   }
 ```
 1. 枚举可以描述一组常量(只能放第一行)
+
 ``` java
     public enum Season {
         SPRING,SUMMER,AUTHOR,WINTER;
@@ -42,10 +43,10 @@
             }
         }
     }
-
 ```
 
 3. 所有的枚举都继承了Enum类,枚举可以当普通的类使用，枚举天生不能被继承，枚举的构造方法是私有的
+
 ``` java
     public enum Season {
         SPRING("春天",1),SUMMER("夏天",2),AUTUMN("秋天",3),WINTER("冬天",4);
@@ -101,7 +102,6 @@
             }
         }
     }
-
 ```
 5. 使用接口定义很多组枚举
 
