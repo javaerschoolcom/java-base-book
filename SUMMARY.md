@@ -29,6 +29,6 @@
     * [第021讲 String类](chapter04-section02.md)
     * [第023讲 日期类](chapter04-section03.md)
     * [第024讲 异常类](chapter04-section04.md)
-
-
+    * [第025讲 集合类](chapter04-section05.md)
+    * [第026讲 泛型](chapter04-section06.md)
 
