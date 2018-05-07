@@ -31,4 +31,6 @@
     * [第024讲 异常类](chapter04-section04.md)
     * [第025讲 集合类](chapter04-section05.md)
     * [第026讲 泛型](chapter04-section06.md)
+    * [第027讲 Map](chapter04-section07.md)
+    * [第028讲 文件类](chapter04-section08.md)
 
