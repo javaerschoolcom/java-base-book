@@ -1,0 +1,31 @@
+{
+  "title": "四川展谊-JAVA基础文档",
+  "author" : "lero",
+  "description": "java基础知识",
+  "language": "zh-hans",
+  "pluginsConfig": {
+    "fontSettings": {
+      "theme": "night",
+      "family": "sans"
+    },
+    "sharing": {
+      "qq": true,
+      "qzone": true,
+      "weibo": true,
+      "douban": true,
+      "facebook": false,
+    "twitter": false,
+    "google": false,
+    "instapaper": false,
+    "vk": false,
+      "all": [
+        "qq", "qzone", "weibo","douban"
+      ]
+  },
+    "plugins": [
+      "-sharing",
+      "-search"
+    ]
+
+  }
+}
