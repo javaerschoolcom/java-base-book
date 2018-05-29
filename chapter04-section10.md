@@ -221,7 +221,7 @@ synchronized(同一个对象){
 }
 ```
 
->  类锁
+类锁
 
 ``` java
 synchronized(类.class){
@@ -259,11 +259,7 @@ public static void  synchronized doSomeThing(){
 
 #####  线程等待(wait)
 
-> 当前线程调用锁的wait方法，就让出cpu的使用权，然后一直阻塞，直到其他线程唤醒它，它才会继续接着原来的位置执行
-
-
-
-
+> 当前线程调用锁的wait方法，就让出cpu的使用权，然后一直阻塞，直到持有该锁的其他线程唤醒它，它才会继续接着原来的位置执行
 
 ##### 线程唤醒(notify|notifyAll)
 
@@ -271,9 +267,253 @@ public static void  synchronized doSomeThing(){
 
 > notifyAll:当前线程唤醒持有同一把锁的其他线程所有线程
 
+###### 案例
+
+> 线程等待
+
+``` java
+public class ThreadWait extends Thread{
+    private  Object o;
+    public   ThreadWait(Object o){
+            this.o= o;
+       }
+    @Override
+    public void run() {
+        synchronized (o){
+            System.out.println("当前线程"+Thread.currentThread().getName()+"进入同步代码块等待开始时间："+System.currentTimeMillis());
+            try {
+                o.wait(); //把当前线程 挂起 ，阻塞
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("当前线程"+Thread.currentThread().getName()+"进入同步代码块等待结束时间："+System.currentTimeMillis());
+        }
+    }
+}
+```
+
+> 线程唤醒
+
+``` java
+public class ThreadNotyfy extends Thread{
+    private  Object o;
+    public ThreadNotyfy(Object o){
+            this.o= o;
+       }
+    @Override
+    public void run() {
+        synchronized (o){
+            System.out.println("当前线程"+Thread.currentThread().getName()+"进入同步代码准备唤醒其他等待线程时间："+System.currentTimeMillis());
+            o.notify(); //前线程唤醒其他该对象锁的其他挂起/阻塞线程 //随机唤醒任意一个  唤醒其他所有的阻塞线程o.notifyAll()
+            System.out.println("当前线程"+Thread.currentThread().getName()+"进入同步代码块唤醒结束时间："+System.currentTimeMillis());
+        }
+    }
+}
+```
+
+> 测试
+
+``` java
+public class Test {
+    public static void main(String[] args) throws InterruptedException {
+        Object o = new Object();
+        ThreadWait threadWait = new ThreadWait(o);
+        threadWait.start();
+        ThreadNotyfy threadNotyfy = new ThreadNotyfy(o);
+        Thread.sleep(1000);
+        threadNotyfy.start();
+    }
+}
+```
 
 
-###  生产者消费者模式
+
+###  生产者消费者模式案例
+
+> 资源
+
+``` java
+public class Resource {
+    private  int  count; //面包个数
+    private  boolean  flag; //默认false
+    //生产者生产面包
+    public  synchronized void  produce(){
+        if(flag){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        count++;
+        flag=!flag;
+        System.out.println("生产者"+Thread.currentThread().getName()+"生产了第"+count+"个面包");
+        notify();
+    }
+
+    //消费者消费面包
+    public  synchronized void  consume(){
+        if(!flag){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        flag=!flag;
+        System.out.println("消费者"+Thread.currentThread().getName()+"消费了第"+count+"个面包");
+        notify();
+    }
+}
+```
+
+> 生产者
+
+``` java
+public class Productor extends  Thread {
+    Resource  resource;
+    public   Productor( Resource  resource){
+        this.resource=resource;
+    }
+    @Override
+    public void run() {
+        while (true){
+            resource.produce();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+> 消费者
+
+``` java
+public class Customer extends  Thread {
+    Resource  resource;
+    public Customer(Resource  resource){
+        this.resource=resource;
+    }
+    @Override
+    public void run() {
+        while (true){
+            resource.consume();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+> 测试
+
+```  java
+public class Test {
+    public static void main(String[] args) {
+        Resource resource = new Resource();
+        Productor productor = new Productor(resource);
+        Customer customer = new Customer(resource);
+        productor.start();
+        customer.start();
+    }
+}
+```
+
+### 经典面试题
+
+> 使用3个线程，分别按顺序打印123
+
+``` java
+public class Test{
+    public static Object a = new Object();
+    public static Object b = new Object();
+    public static Object c = new Object();
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        Test t = new Test();
+        Thread t1 = new Thread(t.new Runner1(), "t1");
+        Thread t2 = new Thread(t.new Runner2(), "t2");
+        Thread t3 = new Thread(t.new Runner3(), "t3");
+        t1.start();
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+        t2.start();
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        t3.start();
+
+    }
+
+    class Runner1 implements  Runnable {
+        public void run() {
+            while (true){
+                try {
+                    synchronized (a) {
+                        synchronized (b) {
+                            System.out.println("1");
+                            b.notify();
+                        }
+                        a.wait();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    class Runner2 implements Runnable {
+        public void run() {
+            while (true) {
+                try {
+                    synchronized (b) {
+                        synchronized (c) {
+                            System.out.println("2");
+                            c.notify();
+                        }
+                        b.wait();
+
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    class Runner3 implements Runnable {
+        public void run() {
+            while (true) {
+                try {
+                    synchronized (c) {
+                        synchronized (a) {
+
+                            System.out.println("3");
+                            a.notify();
+                        }
+
+                        c.wait();
+
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+```
 
 
 
@@ -284,6 +524,90 @@ public static void  synchronized doSomeThing(){
 
 
 ### Lock
+
+> java5出现的轻量级锁，提供了更丰富的功能
+
+
+
+### Callable接口&Future接口
+
+> 线程可以通过该接口的的方法，返回线程执行的结果
+
+> 步骤
+
+``` java
+1. 开启一个线程Thread(Runnable target)
+
+2. 创建一个FutureTask(Callable<V> callable)
+
+3. 创建一个Callable的实现
+```
+
+> 案例
+
+``` java
+public class Test {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        ThreadN threadN = new Test().new ThreadN();
+        FutureTask<Integer> task = new FutureTask<>(threadN);
+        Thread thread = new Thread(task);
+        thread.start();
+        // 异步任务调用返回结果的时候,main线程是是阻塞的会等待3秒,等待执行任务线程结束才会继续往下执行
+        Integer integer = task.get();
+        System.out.println(integer);
+    }
+    class ThreadN implements Callable<Integer>{
+        @Override
+        public Integer call() throws Exception {
+            Thread.sleep(3000);
+            return 1;
+        }
+    }
+}
+```
+
+
+
+###  线程池
+
+> 线程的创建系统开销比较大
+
+> 普通的线程功能不够丰富，定时任务，周期任务
+
+​
+
+###  Executors
+
+> 创建一个固定容量大小的线程池，任务个数多于线程池个数，超出的任务进入等待队列
+
+###### static ExecutorService newFixedThreadPool(int nThreads)
+
+``` java
+public static void main(String[] args) {
+    ExecutorService executorService = Executors.newFixedThreadPool(5); //
+    for (int i=0;i<10;i++){
+        final  int index=i;
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("执行任务："+index+Thread.currentThread().getName());
+            }
+        });
+    }
+}
+```
+
+###### static ExecutorService newCachedThreadPool()
+
+###### static ExecutorService newSingleThreadExecutor()
+
+###### static ScheduledExecutorService newScheduledThreadPool(int corePoolSize)
+
+
+
+//
+
+
 
 
 
